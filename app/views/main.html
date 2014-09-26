@@ -1,14 +1,23 @@
 <div class="container">
-  <h3>CampaignCodex Combat Tracker</h3>
+  <h3>Campaign Codex Combat Tracker</h3>
   <hr>
-  <form role="form" ng-submit="addInitiative()">
-  	<div class="row">
+  <form class="form-inline" role="form" ng-submit="addInitiative()">
+  	<div class="form-group">
   		<div class="input-group">
-  			<input type="text" ng-model="newInitiative" placeholder="Add a combatant" class="form-control">
-  			<span class="input-group-btn">
-  				<input type="submit" class="btn btn-primary" value="Add">
-  			</span>
+  			<label class="sr-only" for="newInitiative.name">Enter name</label>
+  			<input type="text" ng-model="newInitiative.name" placeholder="Enter name" class="form-control">
   		</div>
+  		<div class="input-group">
+  		<label class="sr-only" for="newInitiative.init">Enter init</label>
+  			<input type="text" ng-model="newInitiative.init" placeholder="Enter init" class="form-control">
+  		</div>
+  		<div class="input-group">
+  			<label class="sr-only" for="newInitiative.type">Type</label>
+  			<input type="radio" name="type" value="PC"> PC <input type="radio" name="type" value="monster"> Monster
+  		</div>
+  		<div class="input-group">
+  			<input type="submit" class="btn btn-success" value="Add">
+  		</div>  		  		
   	</div>
   </form>
   
