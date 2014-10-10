@@ -1,34 +1,40 @@
-<div class="container">
-  <h3>Campaign Codex Combat Tracker</h3>
-  <hr>
-  <form class="form-inline" role="form" ng-submit="addInitiative()">
-  	<div class="form-group">
-  		<div class="input-group">
-  			<label class="sr-only" for="newInitiative.name">Enter name</label>
-  			<input type="text" ng-model="newInitiative.name" placeholder="Enter name" class="form-control">
-  		</div>
-  		<div class="input-group">
-  		<label class="sr-only" for="newInitiative.init">Enter init</label>
-  			<input type="text" ng-model="newInitiative.init" placeholder="Enter init" class="form-control">
-  		</div>
-  		<div class="input-group">
-  			<label class="sr-only" for="newInitiative.type">Type</label>
-  			<input type="radio" name="type" value="PC"> PC <input type="radio" name="type" value="monster"> Monster
-  		</div>
-  		<div class="input-group">
-  			<input type="submit" class="btn btn-success" value="Add">
-  		</div>  		  		
-  	</div>
-  </form>
+<div ng-controller="MainCtrl as vm">
+  <h2>Campaign Codex Combat Tracker</h2>
+  <div class="controls">
+	  <form class="form-inline" role="form" ng-submit="vm.addInitiative()">
+	  	<div class="form-group">
+	  		<div class="input-group">
+	  			<label class="sr-only" for="newInitiative.name">Enter name</label>
+	  			<input id="newInitiative.name" type="text" ng-model="vm.newInitiative.name" placeholder="Enter name" class="form-control">
+	  		</div>
+	  		<div class="input-group">
+	  		<label class="sr-only" for="newInitiative.init">Enter init</label>
+	  			<input type="text" ng-model="vm.newInitiative.init" placeholder="Enter init" class="form-control">
+	  		</div>
+	  		<div class="input-group">
+	  			<label class="sr-only" for="newInitiative.type">Type</label>
+	  			<input type="radio" name="type" ng-model="vm.newInitiative.type" value="PC"> PC <input type="radio" name="type" ng-model="newInitiative.type" value="monster"> Monster
+	  		</div>
+	  		<div class="input-group">
+	  			<input type="submit" class="btn btn-success" value="Add">
+	  		</div>  		  		
+	  	</div>
+	  </form>
+  </div>
   
-  <hr>
-  
-  <div ui-sortable ng-model="combat">
-	  <p class="input-group" ng-repeat="initiative in combat" style="padding: 5px 10px; cursor: move;">
-	  	<input type="text" ng-model="initiative" class="form-control">
-	  	<span class="input-group-btn">
-	  		<button class="btn btn-danger" ng-click="removeInitiative($index)" aria-label="Remove">X</button>
-	  	</span>
-	  </p>
+  <div ui-sortable ng-model="vm.combat">
+	<div ng-repeat="initiative in vm.combat | orderBy:vm.sort" class="initiative">
+		<div class="initiative_init">
+		  	<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+		 width="100px" height="100px" viewBox="0 0 265 265" enable-background="new 0 0 265 265" xml:space="preserve">
+				<circle fill="#54FF7B" stroke="#000000" stroke-width="10" stroke-miterlimit="10" cx="132.939" cy="132.728" r="100"/>
+				<text transform="matrix(1 0 0 1 38.2725 182.3027)" font-family="'Verdana'" font-size="120">{{ initiative.init }}</text>
+			</svg>
+		</div>		
+		<div class="initiative_name">
+			{{ initiative.name }} <button class="btn btn-danger initiative_delete" ng-click="vm.removeInitiative($index)" aria-label="Remove">X</button>
+	  	</div>		  	
+	  	<div class="clear"></div>
+	</div>
   </div>
 </div>
