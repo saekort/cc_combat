@@ -7,7 +7,7 @@ function MainCtrl() {
 	// Important: Do business logic in services
 	
 	// Initialize the combat array
-	this.combat = new Array();
+	this.combat = [];
 	this.newInitiative = {};
 	
 	// Demo initiative orders
@@ -32,7 +32,7 @@ function MainCtrl() {
 MainCtrl.prototype.removeInitiative = function(index)
 {
 	this.combat.splice(index, 1);
-}
+};
 
 /**
  * Adds a given initiative to the combat
@@ -49,14 +49,14 @@ MainCtrl.prototype.addInitiative = function()
 	
 	//TODO: This has got to be easier in Angular/jQuery
 	document.getElementById('newInitiative.name').focus();
-}
+};
 
 /**
  * Set the mode of the combat
  */
 MainCtrl.prototype.setMode = function(mode)
 {
-	if(mode == 'combat') {
+	if(mode === 'combat') {
 		// We are switching to combat mode, change from initiative to actual combat order
 //		this.combat.forEach(function(x) {
 //			// Set the order value of the initiative to the init value
@@ -68,7 +68,7 @@ MainCtrl.prototype.setMode = function(mode)
 		this.sort = '';
 		this.mode = mode;
 	}
-}
+};
 
 /**
  * Go to the next initiative in a combat
@@ -77,7 +77,7 @@ MainCtrl.prototype.nextInit = function()
 {
 	var current = this.combat.shift();
 	this.combat.push(current);
-}
+};
 
 /**
  * Go to the previous initiative in a combat
@@ -86,7 +86,7 @@ MainCtrl.prototype.previousInit = function()
 {
 	var current = this.combat.pop();
 	this.combat.unshift(current);
-}
+};
 
 /**
  * Initiative constructor
