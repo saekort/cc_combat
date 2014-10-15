@@ -1,14 +1,14 @@
 <div ng-controller="MainCtrl as vm">
-  <h2>Campaign Codex Combat Tracker</h2>
-  <div class="controls">
-	  <form class="form-inline" role="form" ng-submit="vm.addInitiative()">
-	  	<div class="form-group">
+  <h2 class="text-center">Campaign Codex Combat Tracker</h2>
+  <div ng-if="vm.mode == 'input'" class="row" ng-animate="'animate'">
+	  <form class="form-inline text-center" role="form" ng-submit="vm.addInitiative()">
+	  	<div class="form-group controls">
 	  		<div class="input-group">
 	  			<label class="sr-only" for="newInitiative.name">Enter name</label>
 	  			<input id="newInitiative.name" type="text" ng-model="vm.newInitiative.name" placeholder="Enter name" class="form-control">
 	  		</div>
 	  		<div class="input-group">
-	  		<label class="sr-only" for="newInitiative.init">Enter init</label>
+	  			<label class="sr-only" for="newInitiative.init">Enter init</label>
 	  			<input type="text" ng-model="vm.newInitiative.init" placeholder="Enter init" class="form-control">
 	  		</div>
 	  		<div class="input-group">
@@ -17,23 +17,61 @@
 	  		</div>
 	  		<div class="input-group">
 	  			<input type="submit" class="btn btn-success" value="Add">
-	  		</div>  		  		
+	  		</div>
 	  	</div>
 	  </form>
+	  <div class="spacing"></div>
+  </div>
+  <div ng-if="vm.mode == 'input'" class="row text-center">
+  	<button class="btn btn-success btn-lg" ng-click="vm.setMode('combat')">Start combat</button>
+  </div>
+  <div ng-if="vm.mode == 'todo'">
+	  <div class="controls row">
+		  <form class="form-inline" role="form" ng-submit="vm.addInitiative()">
+		  	<div class="form-group">
+		  		<div class="input-group">
+		  			<label class="sr-only" for="newInitiative.name">Enter name</label>
+		  			<input id="newInitiative.name" type="text" ng-model="vm.newInitiative.name" placeholder="Enter name" class="form-control">
+		  		</div>
+		  		<div class="input-group">
+		  			<label class="sr-only" for="newInitiative.type">Type</label>
+		  			<input type="radio" name="type" ng-model="vm.newInitiative.type" value="PC"> PC <input type="radio" name="type" ng-model="newInitiative.type" value="monster"> Monster
+		  		</div>
+		  		<div class="input-group">
+		  			<input type="submit" class="btn btn-success" value="Add">
+		  		</div>	  		
+		  	</div>
+	  	  </form>		  	
+	  </div>
+	</div>
+	<div ng-if="vm.mode == 'combat'">
+	  <div class="row text-center">
+ 	  	<div class="inline">
+  			<button class="btn btn-success btn-lg" ng-click="vm.nextInit()">Next</button>
+  		</div>
+  		<div class="inline">
+  			<button class="btn btn-success btn-lg" ng-click="vm.previousInit()">Previous</button>
+  		</div>
+  		<div class="inline">
+  			<button class="btn btn-warning btn-lg">Delay</button>
+  		</div>
+  		<div class="inline">
+  			<button class="btn btn-warning btn-lg">Ready</button>
+	  	</div>
+  	  </div>
   </div>
   
-  <div ui-sortable ng-model="vm.combat">
+  <div ng-model="vm.combat">
 	<div ng-repeat="initiative in vm.combat | orderBy:vm.sort" class="initiative">
 		<div class="initiative_init">
-		  	<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-		 width="100px" height="100px" viewBox="0 0 265 265" enable-background="new 0 0 265 265" xml:space="preserve">
-				<circle fill="#54FF7B" stroke="#000000" stroke-width="10" stroke-miterlimit="10" cx="132.939" cy="132.728" r="100"/>
-				<text transform="matrix(1 0 0 1 38.2725 182.3027)" font-family="'Verdana'" font-size="120">{{ initiative.init }}</text>
+			<svg viewBox = "0 0 100 100" version = "1.1" width="100px" height="100px">
+	 			<circle cx = "50" cy = "50" r = "40" fill = "#C1FFB7" stroke = "#3A3A3A" stroke-width = "2"/>
+	 			<text x="50" y="70" fill="#3A3A3A" font-size="55" text-anchor="middle">{{ initiative.init }}</text>
 			</svg>
-		</div>		
+		</div>
 		<div class="initiative_name">
 			{{ initiative.name }} <button class="btn btn-danger initiative_delete" ng-click="vm.removeInitiative($index)" aria-label="Remove">X</button>
-	  	</div>		  	
+	  	</div>
 	  	<div class="clear"></div>
 	</div>
   </div>

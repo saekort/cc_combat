@@ -3,22 +3,19 @@ body {
 }
 
 .container {
-  	margin-top: 20px;
   	margin-bottom: 20px;
   	width: 600px;
 }
 
 .controls {
 	background-color: #FFCA96;
-	border: 2px solid black;	
-	margin: 10px 5px;
+	border: 2px solid black;
+	margin-bottom: 50px;
 	padding: 5px 10px;	
 }
 
-.initiative {
-	cursor: move;	
+.initiative {	
 	margin: 10px 5px;
-	/*padding: 5px 10px;*/
 }
 
 .initiative_init {
@@ -42,6 +39,16 @@ body {
 	float: right;	
 }
 
+.inline {
+	display: inline;
+}
+
+/* Utitility classes */
+
 .clear {
 	clear: both;
+}
+
+.spacing {
+	margin-top: 10px;
 }
