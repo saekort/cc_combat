@@ -1,13 +1,23 @@
 @CHARSET "ISO-8859-1";
 
-.animate-enter {
-	-webkit-transition: 1s linear all; /* Chrome */
-	transition: 1s linear all;
-	opacity: 0;
+.slide-left.ng-enter,
+.slide-left.ng-leave {
+	-webkit-transition: 1s;
+	transition: 1s;
 }
 
-.animate-leave {
-	-webkit-transition: 1s linear all; /* Chrome */
-	transition: 1s linear all;
-	opacity: 0;	
+.slide-left.ng-enter {
+	left: -100%;
+}
+
+.slide-left.ng-enter-active {
+	left: 0;
+}
+
+.slide-left.ng-leave {
+	opacity: 1;
+}
+
+.slide-left.ng-leave-active {
+	opacity: 0;
 }

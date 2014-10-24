@@ -8,10 +8,7 @@ body {
 }
 
 .controls {
-	background-color: #FFCA96;
-	border: 2px solid black;
-	margin-bottom: 50px;
-	padding: 5px 10px;	
+
 }
 
 .initiative {	
@@ -37,6 +34,10 @@ body {
 
 .initiative_delete {
 	float: right;	
+}
+
+.new_initiative_fields {
+	margin-bottom: 5px;
 }
 
 .inline {
