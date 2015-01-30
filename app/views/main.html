@@ -79,7 +79,7 @@
 			{{ initiative.name }} 
 			<button ng-if="initiative.delay" ng-click="vm.takeDelay($index)" class="btn btn-warning">DELAYED</button>
 			<button ng-if="initiative.ready" ng-click="vm.takeReady($index)" class="btn btn-warning">READIED</button>
-			<button class="btn btn-danger initiative_delete" ng-click="vm.removeInitiative($index)">X</button>
+			<button class="btn btn-danger initiative_delete" ng-click="vm.removeInitiative(initiative)">X</button>
 	  	</div>
 	  	<div class="clear"></div>
 	</div>

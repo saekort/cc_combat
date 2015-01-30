@@ -88,8 +88,9 @@ MainCtrl.prototype.addInitiative = function()
 /**
  * Removes a given initiative id from the combat
  */
-MainCtrl.prototype.removeInitiative = function(index)
+MainCtrl.prototype.removeInitiative = function(initiative)
 {
+	var index = this.findWithAttr(this.combat, 'id', initiative.id);
 	this.combat.splice(index, 1);
 };
 
@@ -184,6 +185,17 @@ MainCtrl.prototype.takeReady = function(index)
 };
 
 /**
+ * Find a specific initiative's index
+ */
+MainCtrl.prototype.findWithAttr = function(array, attr, value) {
+    for(var i = 0; i < array.length; i += 1) {
+        if(array[i][attr] === value) {
+            return i;
+        }
+    }
+}
+
+/**
  * Get a random quote to show at combat startup
  */
 MainCtrl.prototype.getQuote = function()
@@ -199,12 +211,25 @@ MainCtrl.prototype.getQuote = function()
  * @returns
  */
 function Initiative(name, init, type) {
+	this.id = this.guid();
 	this.name = name;
 	this.init = init;
 	this.type = type;
 	this.delay = false;
 	this.ready = false;
 }
+
+Initiative.prototype.guid = (function() {
+	  function s4() {
+		    return Math.floor((1 + Math.random()) * 0x10000)
+		               .toString(16)
+		               .substring(1);
+		  }
+		  return function() {
+		    return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
+		           s4() + '-' + s4() + s4() + s4();
+		  };
+		})();
 
 // Setup the angular app
 angular
