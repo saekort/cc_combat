@@ -78,7 +78,7 @@ MainCtrl.prototype.addInitiative = function()
 	
 	// Reset the form fields and return the user to the first one
 	this.newInitiative.name = '';
-	this.newInitiative.init = 0;
+	this.newInitiative.init = '';
 	this.newInitiative.type = '';
 	
 	// Focus back on the name field
