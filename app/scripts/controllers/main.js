@@ -2,13 +2,16 @@
 
 (function() {
 	
-function MainCtrl($location) {
+function MainCtrl($location, toaster) {
 	// Important: Only do presentational logic in controllers
 	// Important: Do business logic in services
 	
 	// Initialize the combat array
 	this.combat = [];
 	this.newInitiative = {};
+	
+	// Initialize the toaster
+	this.toaster = toaster;
 	
 	// See if we have to run the demo
 	if($location.search().demo)
@@ -76,6 +79,9 @@ MainCtrl.prototype.addInitiative = function()
 	this.combat.push(new Initiative(this.newInitiative.name, parseInt(this.newInitiative.init), this.newInitiative.type));
 	this.counter++;
 	
+	// Save the name for toasting later
+	var name = this.newInitiative.name;
+	
 	// Reset the form fields and return the user to the first one
 	this.newInitiative.name = '';
 	this.newInitiative.init = '';
@@ -83,6 +89,8 @@ MainCtrl.prototype.addInitiative = function()
 	
 	// Focus back on the name field
 	document.getElementById('newInitiative.name').focus();
+	
+	this.toaster.pop('success', 'Challenger approaching!', name + ' added to combat');
 };
 
 /**
@@ -92,6 +100,8 @@ MainCtrl.prototype.removeInitiative = function(initiative)
 {
 	var index = this.findWithAttr(this.combat, 'id', initiative.id);
 	this.combat.splice(index, 1);
+	
+	this.toaster.pop('error', 'Looks like something died', initiative.name + ' removed from combat');
 };
 
 /**
@@ -105,6 +115,7 @@ MainCtrl.prototype.setMode = function(mode)
 		this.combat.sort(function(a, b) { if(a.init < b.init) { return 1; } if(a.init > b.init) { return -1; } return 0;});
 		this.sort = '';
 		this.mode = mode;
+		this.toaster.pop('warning', 'Here we go!', 'Combat started');
 	}
 };
 

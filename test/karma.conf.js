@@ -28,7 +28,8 @@ module.exports = function(config) {
       'bower_components/angular-touch/angular-touch.js',
       'bower_components/jquery/dist/jquery.js',
       'bower_components/jquery-ui/ui/jquery-ui.js',
-      'bower_components/angular-ui-sortable/sortable.js',      
+      'bower_components/angular-ui-sortable/sortable.js',
+      'bower_components/angularjs-toaster/toaster.js',
       'app/scripts/**/*.js',
       'test/mock/**/*.js',
       'test/spec/**/*.js'

@@ -53,3 +53,34 @@ body {
 .spacing {
 	margin-top: 10px;
 }
+
+/* make enter animation shorter than default */
+:not(.no-enter)#toast-container > div.ng-enter
+{
+    -webkit-transition: 300ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+    -moz-transition: 300ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+    -ms-transition: 300ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+    -o-transition: 300ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+    transition: 300ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+}
+
+
+
+/* no hover on mobile, change some rules for non-hover */
+#toast-container > div {
+    padding: 1.2rem 1.2rem 1.2rem 50px;
+
+    /* bit more radius than default */
+    -moz-border-radius: 2rem;
+    -webkit-border-radius: 2rem;
+    border-radius: 2rem;
+
+    /* bit more visibility than default */
+    opacity: 1;
+    -ms-filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=100);
+    filter: alpha(opacity=100);
+
+    /* smaller font */
+    font-size: 12pt;
+
+}
