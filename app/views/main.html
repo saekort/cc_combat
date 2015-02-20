@@ -1,6 +1,6 @@
 <div ng-controller="MainCtrl as vm">
 	<h2 class="text-center">Campaign Codex Combat Tracker</h2>
-	<div ng-if="vm.mode == 'input'" class="row" ng-animate="'animate'">
+	<div ng-if="vm.showAddControls" class="row">
 		<form class="form-inline text-center" role="form" ng-submit="vm.addInitiative()">
 			<div class="form-group controls">
 				<div class="new_initiative_fields row">
@@ -20,6 +20,9 @@
 					<div class="input-group">
 			  			<input type="submit" class="btn btn-danger btn-lg btn-block col-md-6" ng-click="vm.newInitiative.type = 'monster'" value="Add as Monster">
 			  		</div>
+				  	<div ng-show="vm.mode == 'combat'" class="inline">
+				  		<button class="btn btn-info btn-lg" ng-click="vm.showAddControls = false">Cancel</button>
+				  	</div>				  		
 		  		</div>
 		  	</div>
 		</form>
@@ -62,12 +65,15 @@
   		<div class="inline">
   			<button class="btn btn-warning btn-lg" ng-click="vm.setReady()">Ready</button>
 	  	</div>
+	  	<div ng-hide="vm.showAddControls" class="inline">
+	  		<button class="btn btn-info btn-lg" ng-click="vm.showAddControls = true">+</button>
+	  	</div>
   	  </div>
   </div>
   
   <div ng-model="vm.combat">
 	<h4 ng-if="vm.combat.length == 0" class="text-center slide-left"><em class="soft">"{{ vm.quote }}"</em></h4>  
-	<div ng-repeat="initiative in vm.combat | orderBy:vm.sort" ng-swipe-left="vm.removeInitiative(initiative)" class="initiative">
+	<div ng-repeat="initiative in vm.combat | orderBy:vm.sort" class="initiative">
 		<div class="initiative_init">
 			<svg viewBox = "0 0 100 100" version = "1.1" width="100px" height="100px">
 	 			<circle ng-if="initiative.type == 'pc'" cx = "50" cy = "50" r = "40" fill = "#C1FFB7" stroke = "#0E6000" stroke-width = "2"></circle>

@@ -10,6 +10,8 @@ function MainCtrl($location, toaster) {
 	this.combat = [];
 	this.newInitiative = {};
 	
+	this.showAddControls = true;
+	
 	// Initialize the toaster
 	this.toaster = toaster;
 	
@@ -91,6 +93,13 @@ MainCtrl.prototype.addInitiative = function()
 	document.getElementById('newInitiative.name').focus();
 	
 	this.toaster.pop('success', 'Challenger approaching!', name + ' added to combat');
+	
+	// See if we are adding in combat
+	if(this.mode === 'combat')
+	{
+		// Hide the add controls again
+		this.showAddControls = false;
+	}
 };
 
 /**
@@ -115,6 +124,7 @@ MainCtrl.prototype.setMode = function(mode)
 		this.combat.sort(function(a, b) { if(a.init < b.init) { return 1; } if(a.init > b.init) { return -1; } return 0;});
 		this.sort = '';
 		this.mode = mode;
+		this.showAddControls = false;
 		this.toaster.pop('warning', 'Here we go!', 'Combat started');
 	}
 };
@@ -204,7 +214,7 @@ MainCtrl.prototype.findWithAttr = function(array, attr, value) {
             return i;
         }
     }
-}
+};
 
 /**
  * Get a random quote to show at combat startup
