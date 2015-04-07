@@ -11,6 +11,12 @@ body {
 
 }
 
+.resetbutton {
+	position: fixed;
+	top: 10px;
+	right: 10px;
+}
+
 .initiative {	
 	margin: 10px 5px;
 }

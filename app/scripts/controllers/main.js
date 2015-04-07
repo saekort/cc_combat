@@ -7,8 +7,8 @@ function MainCtrl($location, toaster) {
 	// Important: Do business logic in services
 	
 	// Initialize the combat array
-	this.combat = [];
 	this.newInitiative = {};
+	this.combat = this.loadCombat();
 	
 	this.showAddControls = true;
 	
@@ -108,6 +108,9 @@ MainCtrl.prototype.addInitiative = function()
 		// Hide the add controls again
 		this.showAddControls = false;
 	}
+	
+	// Save
+	this.saveCombat();
 };
 
 /**
@@ -119,6 +122,9 @@ MainCtrl.prototype.removeInitiative = function(initiative)
 	this.combat.splice(index, 1);
 	
 	this.toaster.pop('error', 'Looks like something died', initiative.name + ' removed from combat');
+	
+	// Save
+	this.saveCombat();
 };
 
 /**
@@ -149,6 +155,9 @@ MainCtrl.prototype.nextInit = function()
 {
 	var current = this.combat.shift();
 	this.combat.push(current);
+	
+	// Save
+	this.saveCombat();
 };
 
 /**
@@ -158,6 +167,9 @@ MainCtrl.prototype.previousInit = function()
 {
 	var current = this.combat.pop();
 	this.combat.unshift(current);
+	
+	// Save
+	this.saveCombat();
 };
 
 /**
@@ -171,6 +183,9 @@ MainCtrl.prototype.setDelay = function()
 	
 	// Proceed to the next initiative	
 	this.nextInit();
+	
+	// Save
+	this.saveCombat();
 };
 
 /**
@@ -184,6 +199,9 @@ MainCtrl.prototype.setReady = function()
 	
 	// Proceed to the next initiative
 	this.nextInit();
+	
+	// Save
+	this.saveCombat();
 };
 
 /**
@@ -200,6 +218,9 @@ MainCtrl.prototype.takeDelay = function(index)
 	
 	// Apply the delayed initiative to the front of the combat order
 	this.combat.unshift(current);
+	
+	// Save
+	this.saveCombat();
 };
 
 /**
@@ -216,6 +237,9 @@ MainCtrl.prototype.takeReady = function(index)
 	
 	// Apply the readied initiative to the front of the combat order
 	this.combat.unshift(current);
+	
+	// Save
+	this.saveCombat();
 };
 
 /**
@@ -227,6 +251,48 @@ MainCtrl.prototype.findWithAttr = function(array, attr, value) {
             return i;
         }
     }
+};
+
+/**
+ * Save the combat in local storage
+ */
+MainCtrl.prototype.saveCombat = function() {
+	// Save the combat to local storage
+	localStorage.setItem('combat', JSON.stringify(this.combat));
+};
+
+/**
+ * Load a combat from local storage
+ */
+MainCtrl.prototype.loadCombat = function() {
+	// Load from local storage
+	if(localStorage.getItem('combat'))
+	{
+		// There is a combat in memory, use it
+		return JSON.parse(localStorage.getItem('combat'));
+	}
+	else
+	{
+		// No combat yet, make a new one, no need to save it yet
+		var emptycombat = [];
+		return emptycombat;
+	}
+};
+
+/**
+ * Reset the current combat
+ */
+MainCtrl.prototype.resetCombat = function() {
+	// Empty localstorage
+	localStorage.removeItem('combat');
+	
+	// Create a new empty combat
+	this.combat = this.loadCombat();
+	
+	this.showAddControls = true;
+	this.mode = 'input';
+	
+	this.toaster.pop('error', 'Combat reset', 'Now go kill some PCs!');	
 };
 
 /**

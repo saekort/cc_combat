@@ -1,4 +1,7 @@
 <div ng-controller="MainCtrl as vm">
+	<div>
+		<button class="btn btn-danger btn-lg resetbutton" ng-click="vm.resetCombat()">! RESET !</button>
+	</div>
 	<h2 class="text-center">Campaign Codex Combat Tracker</h2>
 	<div ng-if="vm.showAddControls" class="row">
 		<form class="form-inline text-center" role="form" ng-submit="vm.addInitiative()">
@@ -63,7 +66,7 @@
 				</svg>
 			</div>
 			<div class="initiative_name">
-				{{ initiative.name }} 
+				{{ initiative.name }}
 				<button ng-if="initiative.delay" ng-click="vm.takeDelay($index)" class="btn btn-warning">DELAYED</button>
 				<button ng-if="initiative.ready" ng-click="vm.takeReady($index)" class="btn btn-warning">READIED</button>
 				<button class="btn btn-danger initiative_delete" ng-click="vm.removeInitiative(initiative)">X</button>
