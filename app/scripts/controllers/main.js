@@ -78,7 +78,15 @@ function MainCtrl($location, toaster) {
 MainCtrl.prototype.addInitiative = function()
 {
 	// Add the new initiative to the combat
-	this.combat.push(new Initiative(this.newInitiative.name, parseInt(this.newInitiative.init), this.newInitiative.type));
+	if(this.mode === 'combat')
+	{
+		this.combat.unshift(new Initiative(this.newInitiative.name, 'N', this.newInitiative.type));
+	}
+	else
+	{
+		this.combat.push(new Initiative(this.newInitiative.name, parseInt(this.newInitiative.init), this.newInitiative.type));
+	}
+	
 	this.counter++;
 	
 	// Save the name for toasting later
@@ -126,6 +134,11 @@ MainCtrl.prototype.setMode = function(mode)
 		this.mode = mode;
 		this.showAddControls = false;
 		this.toaster.pop('warning', 'Here we go!', 'Combat started');
+		
+		// Reset the initiative add fields
+		this.newInitiative.name = '';
+		this.newInitiative.init = '';
+		this.newInitiative.type = '';
 	}
 };
 
