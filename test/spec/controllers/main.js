@@ -16,11 +16,11 @@ describe('Controller: MainCtrl', function () {
     });
   }));
 
-  it('should have no initiatives to start', function () {
-	  scope.combat = [];
-	  expect(scope.combat.length).toBe(0);
-	});
-  
+//  it('should have no initiatives to start', function () {
+//	  scope.combat = [];
+//	  expect(scope.combat.length).toBe(0);
+//	});
+//  
 //  it('should add a initiative to the combat', function () {
 //	  scope.combat = [];
 //	  scope.newInitiative = 'Test 1';
