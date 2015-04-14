@@ -27,6 +27,14 @@ module.exports = function (grunt) {
     // Project settings
     yeoman: appConfig,
 
+    plato: {
+        run: {
+          files: {
+            'report': ['app/**/*.js']
+        }
+      }
+    },       
+    
     // Watches files for changes and runs tasks based on the changed files
     watch: {
       bower: {
@@ -62,7 +70,7 @@ module.exports = function (grunt) {
         ]
       }
     },
-
+    
     // The actual grunt server settings
     connect: {
       options: {
@@ -159,7 +167,7 @@ module.exports = function (grunt) {
         }]
       }
     },
-
+    
     // Automatically inject Bower components into the app
     wiredep: {
       app: {
@@ -206,8 +214,8 @@ module.exports = function (grunt) {
       options: {
         assetsDirs: ['<%= yeoman.dist %>','<%= yeoman.dist %>/images']
       }
-    },
-
+    }, 
+    
     // The following *-min tasks will produce minified files in the dist folder
     // By default, your `index.html`'s <!-- Usemin block --> will take care of
     // minification. These next options are pre-configured if you do not wish
@@ -381,8 +389,12 @@ module.exports = function (grunt) {
     'autoprefixer',
     'connect:test',
     'karma'
+  ]);  
+  
+  grunt.registerTask('stats', [
+    'plato:run'
   ]);
-
+  
   grunt.registerTask('build', [
     'clean:dist',
     'wiredep',
@@ -405,4 +417,5 @@ module.exports = function (grunt) {
     'test',
     'build'
   ]);
+  
 };
